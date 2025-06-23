@@ -7,7 +7,6 @@ import { redirect } from "next/navigation";
  export async function handleSubmission(formData: FormData) {
     const {getUser} = getKindeServerSession();
     const user = await getUser();
-    console.log("Form Data:", formData);
     const title = formData.get("title") ;
     const content = formData.get("content") ;
     const url = formData.get("url") ;
@@ -15,7 +14,7 @@ import { redirect } from "next/navigation";
         console.error("User not authenticated");
         return redirect("/api/auth/register");
     }
-        const data = await prisma.blogPost.create({
+         await prisma.blogPost.create({
            data: {title: title as string,
             content: content as string,
             imageUrl: url as string,
